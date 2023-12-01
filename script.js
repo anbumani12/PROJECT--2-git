@@ -2,20 +2,14 @@ const userInput = document.getElementById("userName");
 const getDetailsButton = document.getElementById("getDetails");
 const profileInfo = document.getElementById("profileInfo");
 const repoInfo = document.getElementById("repoInfo");
-
-//!using async function to get the user details
 getDetailsButton.addEventListener("click", async () => {
   const userName = userInput.value;
-  //console.log(userName);
-  //!using the github api to fetch the data from server.
   const res = await fetch(`https://api.github.com/users/${userName}`);
   const data = await res.json();
-  //console.log(data);
   getProfile(data);
   getRepo(userName);
 });
 
-//!get profile function it is used to get the used details from the server.
 function getProfile(data) {
   console.log(data);
   profileInfo.innerHTML = `<div class="card">
@@ -37,7 +31,6 @@ function getProfile(data) {
    </div>`;
 }
 
-//!get repositories based on the username and passing another api to get that
 async function getRepo(userName) {
   const res = await fetch(`https://api.github.com/users/${userName}/repos`);
   const projects = await res.json();
